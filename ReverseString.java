@@ -1,52 +1,45 @@
-package leetcode;
+package leetcode.leetcodes;
 
-import java.util.LinkedList;
+import java.util.Stack;
 
 import org.junit.Test;
 
-/*
- * Given an input string, reverse the string word by word.
-
- *	For example,
- *	Given s = "the sky is blue",
- *	return "blue is sky the".
- */
 public class ReverseString {
-
-	public String reverseWords(String s) {
-		LinkedList<String> list = new LinkedList<>();
-		int index = 0; // traverse through String s
-		String string = "";// get temperoal string which is a word
-		while (index < s.length()) {
-			char character = s.charAt(index);
-			if (character != ' ') {
-				string += character;
+	public String reverseString(String s) {
+		Stack<String> stack = new Stack<String>();
+		String[] split = s.trim().replaceAll(" +", " ").split(" ");
+		for (String string : split) {
+			stack.push(string.replaceAll(" ", ""));
+		}
+		int size = stack.size();
+		String returnString = "";
+		for (int i = 0; i < size; i++) {
+			if (stack.size() != 1) {
+				returnString += stack.pop() + " ";
 			} else {
-				if (string.length() != 0) {
-					list.addFirst(string);
-					string = "";
-				}
-			}
-			index++;
-		}
-		// if the string ends, and string is not null, add it to linkedlist as
-		// well
-		if (string.length() != 0) {
-			list.addFirst(string);
-		}
-		String finalString = "";
-		if (list.size() > 0) {
-			finalString += list.get(0);
-			for (int i = 1; i < list.size(); i++) {
-				finalString += " " + list.get(i);
+				returnString += stack.pop();
 			}
 		}
-		return finalString;
+		return returnString;
 	}
 
 	@Test
-	public void test1() {
-		String s = "the sky is blue";
-		System.out.println(reverseWords(s));
+	public void test() {
+		System.out.println(reverseString("the sky is blue"));
+		System.out.println(reverseString("the    sky is    blue"));
+	}
+
+	@Test
+	public void replaceAllTest() {
+		String s = "the    sky is    blue";
+		String[] split = s.trim().replaceAll(" +", " ").split(" ");
+		System.out.println(split.length);
+		for (String str : split) {
+			if (str == " ") {
+				System.out.println("haha");
+				continue;
+			}
+			System.out.print(str.replaceAll(" ", "") + "*");
+		}
 	}
 }
