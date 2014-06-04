@@ -29,7 +29,7 @@ public class ReorderList {
 		// split here
 		pointer.next = null;
 
-		second = reverseList(second);
+		second = reverseListRecursion(second);
 
 		// link two list
 
@@ -46,8 +46,30 @@ public class ReorderList {
 	}
 
 	/* Helper Function */
+	
+	//reverse list recursively
+	public ListNode reverseListRecursion(ListNode head) {
+		if (head == null)
+			return null;
+		if (head.next == null)
+			return head;
 
-	public ListNode reverseList(ListNode head) {
+		ListNode pointer = head;
+		ListNode prev = pointer;
+		
+		while (pointer.next != null) {
+			prev = pointer;
+			pointer = pointer.next;
+		}
+
+		prev.next = null;
+		pointer.next = reverseListRecursion(head);
+		
+		return pointer;
+	}
+	
+	//reverse list iteratively
+	public ListNode reverseListInteration(ListNode head) {
 		if (head == null)
 			return null;
 		if (head.next == null)
@@ -67,7 +89,6 @@ public class ReorderList {
 			curr.next = prev;
 			prev = curr;
 		}
-
 		return curr;
 	}
 
@@ -92,19 +113,18 @@ public class ReorderList {
 		ListNode n1 = new ListNode(1);
 		ListNode n2 = new ListNode(2);
 		ListNode n3 = new ListNode(3);
-		// ListNode n4 = new ListNode(4);
-		// ListNode n5 = new ListNode(5);
-		// ListNode n6 = new ListNode(6);
+		ListNode n4 = new ListNode(4);
+		ListNode n5 = new ListNode(5);
+		ListNode n6 = new ListNode(6);
 
 		n1.next = n2;
 		n2.next = n3;
-		// n3.next = n4;
-		// n4.next = n5;
-		// n5.next = n6;
+		n3.next = n4;
+		n4.next = n5;
+		n5.next = n6;
 
 		printList(n1);
-		reorderList(n1);
-		printList(n1);
-
+		System.out.println();
+		printList(reverseListRecursion(n1));
 	}
 }
