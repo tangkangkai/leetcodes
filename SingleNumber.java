@@ -16,7 +16,7 @@ public class SingleNumber {
 		for (int i = 1; i < A.length; i++) {
 			result ^= A[i];
 		}
-		return result;
+		return result ^ 0;
 	}
 
 	public int singleNumberInTriple(int[] A) {
@@ -51,8 +51,7 @@ public class SingleNumber {
 
 	@Test
 	public void test() {
-		String s = "-2";
-		int parseInt = Integer.parseInt(s);
-		System.out.println(parseInt);
+		int[] A = { 1, 2, 2 };
+		System.out.println(singleNumberInDouble(A));
 	}
 }

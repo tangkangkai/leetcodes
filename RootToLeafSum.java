@@ -58,7 +58,6 @@ public class RootToLeafSum {
 		array.add(t5);
 		array.add(t6);
 		
-		System.out.println(arrayValue(array));
 
 	}
 }
